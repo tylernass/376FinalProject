@@ -336,9 +336,9 @@ and return the response without PYTHON_PROMPT.
   std::string	totalBuffer;
   char		buffer[LINE_BUFFER_LEN];
   int		numBytes;
-  // gets(line,BUFFER_SIZE,stdin);
-  numBytes	= fgets(fromPythonFd, LINE_BUFFER_LEN, stdin);
+  numBytes	= read(fromPythonFd, LINE_BUFFER_LEN, stdin);
   // strip off PYTHON_PROMPT (of length PYTHON_PROMPT_LEN) from the end of the response,
+  
   // write(fd[1], totalBuffer, strlen(fromPythonFd) - PYTHON_PROMPT_LEN);
   //  YOUR CODE HERE
   return(totalBuffer);
@@ -1025,32 +1025,12 @@ public :
                   //std::string toEvalStr = "";
                   toEvalStr += '\n';
                   // 2.  Send the C string in the C++ string toEvalStr to Python. In C++, you may access the C string in the C++ string toEvalStr by saying toEvalStr.c_str(). You may obtain its length by saying toEvalStr.size().
-                  write(toPythonArray[0], toEvalStr, sizeof(toEvalStr));
+                  write(fromPythonFd, toEvalStr, sizeof(toEvalStr));
+                  write(socketfd, outputBufferPtr, endTextPtr-outputBufferPtr );
+
+                  numBytes	= read(socketfd, inputBuffer, BUFFER_LEN);
                   // 3. Return whatever value waitForPrompt() returns because that is the expression returned by Python.
 
-                 //  res = curl_easy_perform(curlHandle_);
-                 //
-                 //  if(res != CURLE_OK) {
-                 //    fprintf(stderr, "curl_easy_perform() failed: %s\n",
-                 //            curl_easy_strerror(res));
-                 //  }
-                 //  else {
-                 //
-                 //    printf("%lu bytes retrieved\n", (unsigned long)chunk.size);
-                 //    chunk.memory[chunk.size] = '\0';
-                 //    printf("%s\n",chunk.memory);
-                 //  }
-                 //
-                 //  /* cleanup curl stuff */
-                 //  curl_easy_cleanup(curlHandle_);
-                 //
-                 //  free(chunk.memory);
-                 //
-                 //  /* we're done with libcurl, so clean it up */
-                 //  curl_global_cleanup();
-                 //
-				 //  //  III.  Finished:
-				 // return 0;
 				}
 
 };
