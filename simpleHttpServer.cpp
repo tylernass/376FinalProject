@@ -339,7 +339,7 @@ and return the response without PYTHON_PROMPT.
   // gets(line,BUFFER_SIZE,stdin);
   numBytes	= fgets(fromPythonFd, LINE_BUFFER_LEN, stdin);
   // strip off PYTHON_PROMPT (of length PYTHON_PROMPT_LEN) from the end of the response,
-  write(fd[1], totalBuffer, strlen(fromPythonFd) - PYTHON_PROMPT_LEN);
+  // write(fd[1], totalBuffer, strlen(fromPythonFd) - PYTHON_PROMPT_LEN);
   //  YOUR CODE HERE
   return(totalBuffer);
 }
