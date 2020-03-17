@@ -13,6 +13,8 @@
 // Compile with:
 // $ g++ simpleHttpServer.cpp JSONValue.cpp -o simpleHttpServer -lpthread -lcurl
 
+#include <iostream>
+#include <cstdio>
 #include	<stdlib.h>
 #include	<stdio.h>
 #include	<string.h>
@@ -334,7 +336,7 @@ and return the response without PYTHON_PROMPT.
   std::string	totalBuffer;
   char		buffer[LINE_BUFFER_LEN];
   int		numBytes;
-  gets(line,BUFFER_SIZE,stdin);
+  // gets(line,BUFFER_SIZE,stdin);
   numBytes	= fgets(fromPythonFd, LINE_BUFFER_LEN, stdin);
   // strip off PYTHON_PROMPT (of length PYTHON_PROMPT_LEN) from the end of the response,
   write(fd[1], totalBuffer, strlen(fromPythonFd) - PYTHON_PROMPT_LEN);
@@ -998,7 +1000,7 @@ public :
       				  printf("Attempt to evaluate \"%s\"\n\n",
 					 toEvalStr.c_str()
 					);
-				  return(getExternalContentStr(std::string	toEvalStr));
+				  return(getExternalContentStr(toEvalStr));
 				}
 
   //  PURPOSE:  To use libcurl handle 'curlHandle' to query the registered
@@ -1021,7 +1023,6 @@ public :
 				  //  YOUR CODE HERE curlHandle_
                   // 1. Append a '\n' to toEvalStr
                   //std::string toEvalStr = "";
-                  toEvalStr.clear();
                   toEvalStr += '\n';
                   // 2.  Send the C string in the C++ string toEvalStr to Python. In C++, you may access the C string in the C++ string toEvalStr by saying toEvalStr.c_str(). You may obtain its length by saying toEvalStr.size().
                   write(toPythonArray[0], toEvalStr, sizeof(toEvalStr));
