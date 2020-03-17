@@ -334,7 +334,8 @@ and return the response without PYTHON_PROMPT.
   std::string	totalBuffer;
   char		buffer[LINE_BUFFER_LEN];
   int		numBytes;
-  numBytes	= read(fromPythonFd, totalBuffer, LINE_BUFFER_LEN);
+  gets(line,BUFFER_SIZE,stdin);
+  numBytes	= fgets(fromPythonFd, LINE_BUFFER_LEN, stdin);
   // strip off PYTHON_PROMPT (of length PYTHON_PROMPT_LEN) from the end of the response,
   write(fd[1], totalBuffer, strlen(fromPythonFd) - PYTHON_PROMPT_LEN);
   //  YOUR CODE HERE
