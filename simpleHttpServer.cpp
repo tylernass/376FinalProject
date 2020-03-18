@@ -1000,7 +1000,7 @@ public :
       				  printf("Attempt to evaluate \"%s\"\n\n",
 					 toEvalStr.c_str()
 					);
-				  return(getExternalContentStr(toEvalStr));
+				  return(toEvalStr);
 				}
 
   //  PURPOSE:  To use libcurl handle 'curlHandle' to query the registered
