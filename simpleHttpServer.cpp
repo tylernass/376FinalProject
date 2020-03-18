@@ -1006,7 +1006,11 @@ public :
       				  printf("Attempt to evaluate \"%s\"\n\n",
 					 toEvalStr.c_str()
 					);
-				  return(toEvalStr);
+
+                    toEvalStr += '\n';
+                    write(toPythonfd,toEvalStr.c_str(),toEvalStr.size());
+				    return(toEvalStr);
+
 				}
 
   //  PURPOSE:  To use libcurl handle 'curlHandle' to query the registered
@@ -1026,19 +1030,22 @@ public :
 				  CURLcode		res;
 				  std::string		toReturn;
 
-				  //  YOUR CODE HERE curlHandle_
-                  // 1. Append a '\n' to toEvalStr
-                  //std::string toEvalStr = "";
-                  toReturn += '\n';
-                  // 2.  Send the C string in the C++ string toEvalStr to Python. In C++, you may access the C string in the C++ string toEvalStr by saying toEvalStr.c_str(). You may obtain its length by saying toEvalStr.size().
-                  write(toPythonfd,toEvalStr.c_str(),toEvalStr.size());
-                  // write(socketfd, outputBufferPtr, endTextPtr-outputBufferPtr );
+                  chunk.memory = (char*) malloc(1);
+				  chunk.size =  0;
+				  curl_easy_setopt(curlHandle_,CURLOPT_WRITEDATA,(void *) &chunk);
+				  res = curl_easy_perform(curlHandle_);
 
-                  //numBytes	= read(socketfd, inputBuffer, BUFFER_LEN);
-                  // 3. Return whatever value waitForPrompt() returns because that is the expression returned by Python.
-                  return waitForPrompt(gfd);
+                  if(res != CURLE_OK){
+					fprintf(stderr,"Curl perform failed: %s\n",curl_easy_strerror(res));
+					return ("curl error");
+				  }
+				  chunk.memory[chunk.size] = '\0';
+				  toReturn = parseJson(&chunk);
+				  free(chunk.memory);
+
+				  return(toReturn);
 				}
-
+				}
 };
 
 
