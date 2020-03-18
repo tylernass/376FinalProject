@@ -1033,7 +1033,7 @@ public :
 
                   //numBytes	= read(socketfd, inputBuffer, BUFFER_LEN);
                   // 3. Return whatever value waitForPrompt() returns because that is the expression returned by Python.
-
+                  return waitForPrompt(fd);
 				}
 
 };
