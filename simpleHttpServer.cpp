@@ -1008,7 +1008,7 @@ public :
 					);
 
                     toEvalStr += '\n';
-                    write(toPythonfd_, toEvalStr.c_str(), toEvalStr.size());
+                    write(toPythonFd_, toEvalStr.c_str(), toEvalStr.size());
 				    return(toEvalStr);
 
 				}
