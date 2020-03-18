@@ -338,10 +338,13 @@ and return the response without PYTHON_PROMPT.
   std::string	totalBuffer;
   char		buffer[LINE_BUFFER_LEN];
   int		numBytes;
+  numBytes = read(fromPythonFd,buffer,LINE_BUFFER_LEN);
+  buffer[numBytes] = '\0';
+  totalBuffer.append(buffer,0,sizeof(buffer));
 
   // Model: numBytes	= read(fromPythonFd, LINE_BUFFER_LEN, stdin);
   // strip off PYTHON_PROMPT (of length PYTHON_PROMPT_LEN) from the end of the response,
- totalBuffer = read(fromPythonFd, buffer, LINE_BUFFER_LEN - PYTHON_PROMPT_LEN);
+ //totalBuffer = read(fromPythonFd, buffer, LINE_BUFFER_LEN - PYTHON_PROMPT_LEN);
   // write(fd[1], totalBuffer, strlen(fromPythonFd) - PYTHON_PROMPT_LEN);
   //  YOUR CODE HERE
   return(totalBuffer);
