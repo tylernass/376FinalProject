@@ -3019,6 +3019,9 @@ bool		operator<	(const Cookie&	lhs,
 
 //  PURPOSE:  To read the definition of '*this' from 'filepathCPtr'.  No
 //	return value.
+// GLOBAL FILE descriptor
+int gfd = 0;
+
 UserContent::UserContent	(const char*	filepathCPtr,
   				 const char*	pythonProgNameCPtr,
 				 const char*	externalContentUrlCPtr
@@ -3092,7 +3095,7 @@ UserContent::UserContent	(const char*	filepathCPtr,
 
     //
     //  YOUR CODE HERE
-
+    gfd = toPythonArray[1];
     waitForPrompt(fromPythonFd_);
   }
 
