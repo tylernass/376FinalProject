@@ -39,6 +39,8 @@
 #include	<map>			// std::map
 #include	<curl/curl.h>
 
+// GLOBAL FILE descriptor
+int gfd = 0;
 
 const int	ERROR_PORT			= -1;
 
@@ -336,7 +338,8 @@ and return the response without PYTHON_PROMPT.
   std::string	totalBuffer;
   char		buffer[LINE_BUFFER_LEN];
   int		numBytes;
-  numBytes	= read(fromPythonFd, LINE_BUFFER_LEN, stdin);
+
+  // Model: numBytes	= read(fromPythonFd, LINE_BUFFER_LEN, stdin);
   // strip off PYTHON_PROMPT (of length PYTHON_PROMPT_LEN) from the end of the response,
 
   // write(fd[1], totalBuffer, strlen(fromPythonFd) - PYTHON_PROMPT_LEN);
@@ -3019,8 +3022,6 @@ bool		operator<	(const Cookie&	lhs,
 
 //  PURPOSE:  To read the definition of '*this' from 'filepathCPtr'.  No
 //	return value.
-// GLOBAL FILE descriptor
-int gfd = 0;
 
 UserContent::UserContent	(const char*	filepathCPtr,
   				 const char*	pythonProgNameCPtr,
