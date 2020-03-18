@@ -1045,7 +1045,6 @@ public :
 
 				  return(toReturn);
 				}
-				}
 };
 
 
