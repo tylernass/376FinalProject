@@ -3870,7 +3870,10 @@ Page*		PageStore::getPagePtr
 
     strcpy(filePath,cPtr);
   }
-
+  if  ( strcmp(filePath, SYM_EVAL_PAGE_NAME) == 0) {
+      // set request.getQuery()["chiTemp"] the value returned by content.getExternalContentStr().
+      content.getExternalContentStr() = request.getQuery()["chiTemp"];
+  }
   if  ( appearsToBeStaticFile(filePath) )
   {
     //  II.B.1.  Handle static pages:
