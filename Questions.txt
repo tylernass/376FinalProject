@@ -1,2 +1,5 @@
-TODO
-- 
+Questions:
+1. How do I read/write files in C++? Line 1031
+2. Are my pipes properly set up and implemented?
+3. Am I setting request.getQuery()["chiTemp"] correctly? Line 3873
+4. Is PageStr::getPagePtr() properly implemented? Line 3767
