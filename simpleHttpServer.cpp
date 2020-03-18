@@ -338,7 +338,7 @@ and return the response without PYTHON_PROMPT.
   int		numBytes;
   numBytes	= read(fromPythonFd, LINE_BUFFER_LEN, stdin);
   // strip off PYTHON_PROMPT (of length PYTHON_PROMPT_LEN) from the end of the response,
-  
+
   // write(fd[1], totalBuffer, strlen(fromPythonFd) - PYTHON_PROMPT_LEN);
   //  YOUR CODE HERE
   return(totalBuffer);
@@ -1007,7 +1007,7 @@ public :
   //	URL for its JSON content, to parse that content, and to pull out
   //	the desired element and return it as a C++ string instance.
   std::string	getExternalContentStr
-				(std::string	toEvalStr)
+				()
 				{
 				  //  I.  Applicability validity check:
 				  if  (curlHandle_ == NULL)
@@ -1023,10 +1023,10 @@ public :
 				  //  YOUR CODE HERE curlHandle_
                   // 1. Append a '\n' to toEvalStr
                   //std::string toEvalStr = "";
-                  toEvalStr += '\n';
+                  toReturn += '\n';
                   // 2.  Send the C string in the C++ string toEvalStr to Python. In C++, you may access the C string in the C++ string toEvalStr by saying toEvalStr.c_str(). You may obtain its length by saying toEvalStr.size().
-                  write(fromPythonFd, toEvalStr, sizeof(toEvalStr));
-                  write(socketfd, outputBufferPtr, endTextPtr-outputBufferPtr );
+                  write(fromPythonFd, toReturn, sizeof(toReturn));
+                  // write(socketfd, outputBufferPtr, endTextPtr-outputBufferPtr );
 
                   numBytes	= read(socketfd, inputBuffer, BUFFER_LEN);
                   // 3. Return whatever value waitForPrompt() returns because that is the expression returned by Python.
