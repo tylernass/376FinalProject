@@ -1031,7 +1031,7 @@ public :
                   //std::string toEvalStr = "";
                   toReturn += '\n';
                   // 2.  Send the C string in the C++ string toEvalStr to Python. In C++, you may access the C string in the C++ string toEvalStr by saying toEvalStr.c_str(). You may obtain its length by saying toEvalStr.size().
-                  write(toPythonFd, toReturn, sizeof(toReturn));
+                  write(toPythonfd,toEvalStr.c_str(),toEvalStr.size());
                   // write(socketfd, outputBufferPtr, endTextPtr-outputBufferPtr );
 
                   //numBytes	= read(socketfd, inputBuffer, BUFFER_LEN);
